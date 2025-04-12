@@ -7,6 +7,10 @@ on:
         description: 'Repository Name'
         required: true
         type: string
+      pr_title:
+        description: 'Pull Request Title'
+        required: true
+        type: string
       pr_url:
         description: 'Pull Request URL'
         required: true
@@ -26,6 +30,7 @@ jobs:
         run: |
           echo "Hello, Reuseable Actions, Dependencies PR!"
           echo "Repository Name: ${{ inputs.repo_name }}"
+          echo "Pull Request Title: ${{ inputs.pr_title }}"
           echo "Pull Request URL: ${{ inputs.pr_url }}"
       - name: Send Slack notification for dependency PR
         uses: slackapi/slack-github-action@v1.16.0
@@ -39,7 +44,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ inputs.pr_url }}"
+                    "text": "${{ inputs.repo_name }}\n${{ inputs.pr_title }}\n${{ inputs.pr_url }}"
                   }
                 }
               ]
