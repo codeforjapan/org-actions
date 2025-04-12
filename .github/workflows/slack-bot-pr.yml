@@ -32,21 +32,15 @@ jobs:
           echo "Pull Request Title: ${{ inputs.pr_title }}"
           echo "Pull Request URL: ${{ inputs.pr_url }}"
       - name: Send Slack notification for dependency PR
-        uses: slackapi/slack-github-action@v1.16.0
+        uses: slackapi/slack-github-action@v2.0.0
         with:
-          channel-id: ${{ secrets.slack_channel_id }}
+          method: chat.postMessage
+          token: ${{ secrets.slack_bot_token }}
           payload: |
-            {
-              "text": "プルリクエスト: ${{ inputs.repo_name }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "${{ inputs.repo_name }}\n${{ inputs.pr_title }}\n${{ inputs.pr_url }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+            channel: ${{ secrets.slack_channel_id }}
+            text: "プルリクエスト: ${{ inputs.repo_name }}"
+            blocks:
+              - type: section
+                text:
+                  type: mrkdwn
+                  text: "${{ inputs.repo_name }}\n${{ inputs.pr_title }}\n${{ inputs.pr_url }}"
