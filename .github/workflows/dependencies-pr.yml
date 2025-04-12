@@ -11,9 +11,9 @@ on:
         description: 'Pull Request URL'
         required: true
         type: string
-    # secrets:
-    #   slack_bot_token:
-    #     required: false
+    secrets:
+      slack_bot_token:
+        required: false
 
 jobs:
   reusable-job:
@@ -25,22 +25,22 @@ jobs:
           echo "Hello, Reuseable Actions, Dependencies PR!"
           echo "Repository Name: ${{ inputs.repo_name }}"
           echo "Pull Request URL: ${{ inputs.pr_url }}"
-      # - name: Send Slack notification for dependency PR
-      #   uses: slackapi/slack-github-action@v1.16.0
-      #   with:
-      #     channel-id: 'C08ED12D7DY'
-      #     payload: |
-      #       {
-      #         "text": "セキュリティボットのプルリクエスト: ${{ inputs.repo_name }}",
-      #         "blocks": [
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "${{ inputs.pr_url }}"
-      #             }
-      #           }
-      #         ]
-      #       }
-      #   env:
-      #     SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+      - name: Send Slack notification for dependency PR
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          channel-id: 'C08ED12D7DY'
+          payload: |
+            {
+              "text": "セキュリティボットのプルリクエスト: ${{ inputs.repo_name }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ inputs.pr_url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
