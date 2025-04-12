@@ -12,6 +12,8 @@ on:
         required: true
         type: string
     secrets:
+      slack_channel_id:
+        required: false
       slack_bot_token:
         required: false
 
@@ -28,7 +30,7 @@ jobs:
       - name: Send Slack notification for dependency PR
         uses: slackapi/slack-github-action@v1.16.0
         with:
-          channel-id: 'C08ED12D7DY'
+          channel-id: ${{ secrets.slack_channel_id }}
           payload: |
             {
               "text": "セキュリティボットのプルリクエスト: ${{ inputs.repo_name }}",
