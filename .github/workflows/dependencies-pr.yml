@@ -2,19 +2,40 @@ name: Reusable Dependencies PR Workflow
 
 on:
   workflow_call:
-    # このワークフローは他のワークフローから呼び出せるように設定
     inputs:
+      repo_name:
+        description: 'Repository Name'
+        required: true
+        type: string
       pr_url:
         description: 'Pull Request URL'
         required: true
         type: string
+    secrets:
+      slack_bot_token:
+        required: false
 
 jobs:
   reusable-job:
     if: ${{ ( github.event.pull_request.state == 'open' && contains(github.event.pull_request.labels.*.name, 'dependencies') ) || ( github.event.pull_request.user.login == 'dependabot[bot]' ) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Hello message
-        run: |
-          echo "Hello, Reuseable Actions, Dependencies PR!"
-          echo "PR URL: ${{ inputs.pr_url }}" 
+      - name: Send Slack notification for dependency PR
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          channel-id: 'C08ED12D7DY'
+          payload: |
+            {
+              "text": "セキュリティボットのプルリクエスト: ${{ inputs.repo_name }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ inputs.pr_url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
