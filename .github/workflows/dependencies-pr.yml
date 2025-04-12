@@ -23,7 +23,8 @@ jobs:
       - name: Hello message
         run: |
           echo "Hello, Reuseable Actions, Dependencies PR!"
-          echo "${{ inputs.pr_url }}"
+          echo "Repository Name: ${{ inputs.repo_name }}"
+          echo "Pull Request URL: ${{ inputs.pr_url }}"
       # - name: Send Slack notification for dependency PR
       #   uses: slackapi/slack-github-action@v1.16.0
       #   with:
