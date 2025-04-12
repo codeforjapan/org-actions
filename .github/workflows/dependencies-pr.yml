@@ -3,10 +3,10 @@ name: Reusable Dependencies PR Workflow
 on:
   workflow_call:
     inputs:
-      # repo_name:
-      #   description: 'Repository Name'
-      #   required: true
-      #   type: string
+      repo_name:
+        description: 'Repository Name'
+        required: true
+        type: string
       pr_url:
         description: 'Pull Request URL'
         required: true
