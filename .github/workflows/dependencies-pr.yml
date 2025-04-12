@@ -3,10 +3,10 @@ name: Reusable Dependencies PR Workflow
 on:
   workflow_call:
     inputs:
-      repo_name:
-        description: 'Repository Name'
-        required: true
-        type: string
+      # repo_name:
+      #   description: 'Repository Name'
+      #   required: true
+      #   type: string
       pr_url:
         description: 'Pull Request URL'
         required: true
@@ -23,7 +23,6 @@ jobs:
       - name: Hello message
         run: |
           echo "Hello, Reuseable Actions, Dependencies PR!"
-          echo "${{ inputs.repo_name }}"
           echo "${{ inputs.pr_url }}"
       # - name: Send Slack notification for dependency PR
       #   uses: slackapi/slack-github-action@v1.16.0
