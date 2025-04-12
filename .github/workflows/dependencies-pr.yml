@@ -3,6 +3,11 @@ name: Reusable Dependencies PR Workflow
 on:
   workflow_call:
     # このワークフローは他のワークフローから呼び出せるように設定
+    inputs:
+      pr_url:
+        description: 'Pull Request URL'
+        required: true
+        type: string
 
 jobs:
   reusable-job:
@@ -10,4 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello message
-        run: echo "Hello, Reuseable Actions, Dependencies PR!" 
+        run: |
+          echo "Hello, Reuseable Actions, Dependencies PR!"
+          echo "PR URL: ${{ inputs.pr_url }}" 
