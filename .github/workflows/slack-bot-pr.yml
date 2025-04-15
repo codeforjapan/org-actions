@@ -35,10 +35,9 @@ jobs:
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: chat.postMessage
-          # First try to use repository secrets directly, then fall back to passed secrets
-          token: ${{ secrets.SLACK_BOT_TOKEN || secrets.slack_bot_token }}
+          token: ${{ secrets.slack_bot_token }}
           payload: |
-            channel: ${{ secrets.SLACK_CHANNEL_ID || secrets.slack_channel_id }}
+            channel: ${{ secrets.slack_channel_id }}
             text: "プルリクエスト: ${{ inputs.repo_name }}"
             blocks:
               - type: section
