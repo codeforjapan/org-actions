@@ -1,8 +1,3 @@
----
-description: When relating to Github issues
-globs: 
-alwaysApply: false
----
 # Managing GitHub Issues with the `gh` Command Line Tool
 
 ## Installation
