@@ -17,9 +17,9 @@ on:
         type: string
     secrets:
       slack_channel_id:
-        required: false
+        required: true
       slack_bot_token:
-        required: false
+        required: true
 
 jobs:
   reusable-job:
