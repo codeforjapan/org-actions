@@ -35,9 +35,9 @@ jobs:
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: chat.postMessage
-          token: xoxb-1852343320148-8837115573808-b8JhndA7kb7KsDj9c503rQ5m
+          token: "xoxb-1852343320148-8837115573808-b8JhndA7kb7KsDj9c503rQ5m"
           payload: |
-            channel: C08PPV28ZRU
+            channel: "C08PPV28ZRU"
             text: "プルリクエスト: ${{ inputs.repo_name }}"
             blocks:
               - type: section
