@@ -35,13 +35,12 @@ jobs:
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
-            channel: ${{ secrets.slack_channel_id }}
+            channel: ${{ secrets.SLACK_CHANNEL_ID }}
             text: "プルリクエスト: ${{ inputs.repo_name }}"
             blocks:
               - type: section
                 text:
                   type: mrkdwn
                   text: "${{ inputs.repo_name }}\n${{ inputs.pr_title }}\n${{ inputs.pr_url }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
